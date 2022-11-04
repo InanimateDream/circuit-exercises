@@ -1,0 +1,12 @@
+#!yosys
+
+read -vlog2k mul.v
+hierarchy -top slmul4
+synth -flatten
+async2sync
+dffunmap
+abc -g AND
+write_verilog target/synth.v
+write_blif target/synth.blif
+write_aiger -ascii target/synth.aiger
+
